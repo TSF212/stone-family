@@ -25,8 +25,8 @@ export const en = {
   stats: [
     { v: '0', l: 'veins, clouds or visible cracks' },
     { v: '1', l: 'quarry — one source, one shade' },
-    { v: '3,200 m³', l: 'annual extraction' },
-    { v: '12 d', l: 'from quarry to Casablanca port' },
+    { v: '40,398 m³', l: 'annual extraction' },
+    { v: '5 d', l: 'from quarry to Casablanca port' },
   ],
 
   stone: {
@@ -55,11 +55,11 @@ export const en = {
 
   quarryFacts: [
     { k: 'Altitude', v: '1,480 m' },
-    { k: 'Estimated reserves', v: '> 40 years' },
-    { k: 'Extraction', v: 'Diamond wire' },
-    { k: 'Average block', v: '2.8 × 1.6 × 1.4 m' },
-    { k: 'Annual capacity', v: '3,200 m³' },
-    { k: 'Certifications', v: 'CE · EUR-1 · ISO 9001' },
+    { k: 'Estimated reserves', v: '> 20 years' },
+    { k: 'Extraction', v: 'Diamond wire & Roadheader' },
+    { k: 'Average block', v: '2.80 × 1.60 × 1.60 m' },
+    { k: 'Annual capacity', v: '40,398 m³' },
+    { k: 'Certifications', v: 'CE · EUR-1' },
   ],
 
   finishes: {
@@ -105,13 +105,12 @@ export const en = {
     { k: 'Incoterms', v: 'EXW quarry · FOB Casablanca · CIF destination port' },
     { k: 'Ports', v: 'Casablanca · Agadir · Tanger Med' },
     { k: 'Packaging', v: 'ISPM 15 wooden crates, metal frames, reinforced strapping' },
-    { k: 'Lead time', v: '3 to 5 weeks depending on volume and finish' },
+    { k: 'Lead time', v: '1 to 3 weeks depending on volume and finish' },
     { k: 'Documents', v: 'Certificate of origin, EUR-1, packing list, lab report' },
   ],
 
   certItems: [
     'CE marking — EN 1469',
-    'ISO 9001:2015',
     'CTC Morocco report',
     'EUR-1 — European Union',
   ],

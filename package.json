@@ -7,7 +7,7 @@
     "build": "astro build",
     "preview": "astro preview"
   },
-  "devDependencies": {
-    "astro": "^4.16.19"
+  "dependencies": {
+    "astro": "^4.15.0"
   }
 }

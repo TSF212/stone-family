@@ -25,8 +25,8 @@ export const fr = {
   stats: [
     { v: '0', l: 'veine, nuage ou fissure visible' },
     { v: '1', l: 'carrière — une seule source, une seule teinte' },
-    { v: '3 200 m³', l: "d'extraction annuelle" },
-    { v: '12 j', l: 'de la carrière au port de Casablanca' },
+    { v: '40 398 m³', l: "d'extraction annuelle" },
+    { v: '5 j', l: 'de la carrière au port de Casablanca' },
   ],
 
   stone: {
@@ -55,11 +55,11 @@ export const fr = {
 
   quarryFacts: [
     { k: 'Altitude', v: '1 480 m' },
-    { k: 'Réserves estimées', v: '> 40 ans' },
-    { k: 'Extraction', v: 'Fil diamanté' },
-    { k: 'Bloc moyen', v: '2,8 × 1,6 × 1,4 m' },
-    { k: 'Capacité annuelle', v: '3 200 m³' },
-    { k: 'Certifications', v: 'CE · EUR-1 · ISO 9001' },
+    { k: 'Réserves estimées', v: '> 20 ans' },
+    { k: 'Extraction', v: 'Fil diamanté & Haveuse' },
+    { k: 'Bloc moyen', v: '2,80 × 1,60 × 1,60 m' },
+    { k: 'Capacité annuelle', v: '40 398 m³' },
+    { k: 'Certifications', v: 'CE · EUR-1' },
   ],
 
   finishes: {
@@ -105,13 +105,12 @@ export const fr = {
     { k: 'Incoterms', v: 'EXW carrière · FOB Casablanca · CIF port destination' },
     { k: 'Ports', v: 'Casablanca · Agadir · Tanger Med' },
     { k: 'Emballage', v: 'Caisses bois ISPM 15, châssis métal, cerclage renforcé' },
-    { k: 'Délai', v: '3 à 5 semaines selon volume et finition' },
+    { k: 'Délai', v: '1 à 3 semaines selon volume et finition' },
     { k: 'Documents', v: 'Certificat origine, EUR-1, packing list, rapport laboratoire' },
   ],
 
   certItems: [
     'Marquage CE — EN 1469',
-    'ISO 9001:2015',
     'Rapport CTC Maroc',
     'EUR-1 — Union Européenne',
   ],
