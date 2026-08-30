@@ -1,0 +1,107 @@
+---
+import { locales, defaultLocale, type Locale } from '../i18n/index';
+
+interface Props {
+  title: string;
+  description: string;
+  locale: Locale;
+  canonicalPath?: string;
+}
+
+const { title, description, locale, canonicalPath = '' } = Astro.props;
+const site = 'https://thestonefamily.com';
+
+// Génère les URLs hreflang pour toutes les locales
+function hrefForLocale(loc: string) {
+  if (loc === defaultLocale) return `${site}/${canonicalPath}`;
+  return `${site}/${loc}/${canonicalPath}`;
+}
+
+const isRtl = locale === 'ar';
+---
+
+<!DOCTYPE html>
+<html lang={locale} dir={isRtl ? 'rtl' : 'ltr'}>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+
+  <!-- Canonical -->
+  <link rel="canonical" href={hrefForLocale(locale)} />
+
+  <!-- hreflang — SEO multilingue -->
+  {locales.map((loc) => (
+    <link rel="alternate" hreflang={loc} href={hrefForLocale(loc)} />
+  ))}
+  <link rel="alternate" hreflang="x-default" href={hrefForLocale(defaultLocale)} />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={hrefForLocale(locale)} />
+  <meta property="og:image" content={`${site}/images/og-image.jpg`} />
+
+  <!-- Fonts — Google Fonts (Archivo + Barlow + IBM Plex Mono) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Barlow:wght@300;400;500&family=IBM+Plex+Mono:wght@400&family=Noto+Kufi+Arabic:wght@300;400;500&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+  <!-- Structured data — Organization -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "The Stone Family",
+      "url": "https://thestonefamily.com",
+      "logo": "https://thestonefamily.com/images/logo.png",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "sales",
+        "availableLanguage": ["French", "English", "Italian", "Spanish", "Arabic"]
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Béni Mellal",
+        "addressCountry": "MA"
+      }
+    }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: #0B0B09;
+      color: #EDEBE4;
+      font-family: 'Barlow', 'Noto Kufi Arabic', system-ui, sans-serif;
+      font-weight: 300;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    button { cursor: pointer; font: inherit; }
+
+    /* Utilitaires globaux */
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 40px; }
+    .mono { font-family: 'IBM Plex Mono', 'Noto Kufi Arabic', monospace; }
+    .accent { color: #C8A96A; }
+
+    /* Scrollbar discrète */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: #0B0B09; }
+    ::-webkit-scrollbar-thumb { background: #2a2a24; }
+  </style>
+</head>
+<body>
+  <slot />
+</body>
+</html>

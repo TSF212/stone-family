@@ -1,0 +1,61 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# Redirections par langue basées sur Accept-Language
+[[redirects]]
+  from = "/"
+  to = "/en"
+  status = 302
+  conditions = {Language = ["en"]}
+  force = false
+
+[[redirects]]
+  from = "/"
+  to = "/it"
+  status = 302
+  conditions = {Language = ["it"]}
+  force = false
+
+[[redirects]]
+  from = "/"
+  to = "/es"
+  status = 302
+  conditions = {Language = ["es"]}
+  force = false
+
+[[redirects]]
+  from = "/"
+  to = "/ar"
+  status = 302
+  conditions = {Language = ["ar"]}
+  force = false
+
+# Formulaire Netlify Forms
+[[redirects]]
+  from = "/success"
+  to = "/"
+  status = 301
+
+# Headers de sécurité
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+# Cache assets statiques
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

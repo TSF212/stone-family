@@ -1,0 +1,64 @@
+---
+import { localeLabels, defaultLocale, type Locale } from '../i18n/index';
+
+interface Props {
+  t: any;
+  locale: Locale;
+  currentPath?: string;
+}
+
+const { t, locale, currentPath = '' } = Astro.props;
+
+function switchUrl(loc: string) {
+  if (loc === defaultLocale) return `/${currentPath}`;
+  return `/${loc}/${currentPath}`;
+}
+---
+
+<header style="position:sticky;top:0;z-index:50;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:18px 28px;padding:16px 28px;background:rgba(11,11,9,0.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(237,235,228,0.09);">
+
+  <!-- Logo -->
+  <a href={locale === defaultLocale ? '/' : `/${locale}/`} style="display:flex;align-items:center;gap:10px;flex:none;">
+    <span style="font-family:'Archivo',system-ui,sans-serif;font-weight:600;font-size:16px;letter-spacing:0.08em;text-transform:uppercase;color:#EDEBE4;">
+      The Stone Family
+    </span>
+  </a>
+
+  <!-- Navigation principale -->
+  <nav style="display:flex;flex-wrap:wrap;align-items:center;gap:10px 26px;font-size:13px;letter-spacing:0.07em;text-transform:uppercase;color:rgba(237,235,228,0.65);">
+    <a href="#pierre" style="transition:color 0.2s;" onmouseover="this.style.color='#C8A96A'" onmouseout="this.style.color='rgba(237,235,228,0.65)'">{t.nav.stone}</a>
+    <a href="#carriere" style="transition:color 0.2s;" onmouseover="this.style.color='#C8A96A'" onmouseout="this.style.color='rgba(237,235,228,0.65)'">{t.nav.quarry}</a>
+    <a href="#finitions" style="transition:color 0.2s;" onmouseover="this.style.color='#C8A96A'" onmouseout="this.style.color='rgba(237,235,228,0.65)'">{t.nav.finishes}</a>
+    <a href="#export" style="transition:color 0.2s;" onmouseover="this.style.color='#C8A96A'" onmouseout="this.style.color='rgba(237,235,228,0.65)'">{t.nav.export}</a>
+    <a href="#contact" style="transition:color 0.2s;" onmouseover="this.style.color='#C8A96A'" onmouseout="this.style.color='rgba(237,235,228,0.65)'">{t.nav.contact}</a>
+  </nav>
+
+  <!-- Sélecteur de langue + CTA -->
+  <div style="display:flex;align-items:center;flex-wrap:wrap;gap:12px 18px;min-width:0;">
+
+    <!-- Langues -->
+    <div style="display:flex;align-items:center;gap:2px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.12em;">
+      {Object.entries(localeLabels).map(([loc, label]) => (
+        <a
+          href={switchUrl(loc)}
+          style={`padding:5px 7px;color:${loc === locale ? '#C8A96A' : 'rgba(237,235,228,0.38)'};transition:color 0.2s;`}
+          onmouseover="this.style.color='#EDEBE4'"
+          onmouseout={`this.style.color='${loc === locale ? '#C8A96A' : 'rgba(237,235,228,0.38)'}'`}
+        >
+          {label}
+        </a>
+      ))}
+    </div>
+
+    <!-- CTA -->
+    <a
+      href="#contact"
+      style="padding:11px 22px;border:1px solid #C8A96A;color:#C8A96A;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;white-space:nowrap;transition:all 0.2s;"
+      onmouseover="this.style.background='#C8A96A';this.style.color='#0B0B09';"
+      onmouseout="this.style.background='transparent';this.style.color='#C8A96A';"
+    >
+      {t.cta_sample}
+    </a>
+  </div>
+
+</header>
