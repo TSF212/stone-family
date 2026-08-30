@@ -1,10 +1,8 @@
 import { fr } from './fr';
 import { en } from './en';
-
-// Ajoutez it.ts, es.ts, ar.ts au même format et importez-les ici
-// import { it } from './it';
-// import { es } from './es';
-// import { ar } from './ar';
+import { it } from './it';
+import { es } from './es';
+import { ar } from './ar';
 
 export const locales = ['fr', 'en', 'it', 'es', 'ar'] as const;
 export type Locale = typeof locales[number];
@@ -14,9 +12,9 @@ export const defaultLocale: Locale = 'fr';
 export const translations: Record<string, typeof fr> = {
   fr,
   en,
-  // it,
-  // es,
-  // ar,
+  it,
+  es,
+  ar,
 };
 
 // Retourne les traductions pour une locale donnée, avec fallback FR
