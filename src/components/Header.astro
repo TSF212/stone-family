@@ -15,82 +15,146 @@ function switchUrl(loc: string) {
 }
 ---
 
-<header style="position:sticky;top:0;z-index:50;display:flex;align-items:stretch;justify-content:space-between;gap:28px;background:#F2F0EC;border-bottom:1px solid rgba(0,0,0,0.08);">
+<header id="site-header" style="position:sticky;top:0;z-index:50;background:#F2F0EC;border-bottom:1px solid rgba(0,0,0,0.08);">
 
-  <!-- Logo — pleine hauteur -->
-  <a href={locale === defaultLocale ? '/' : `/${locale}/`} style="display:flex;align-items:center;flex:none;padding:0 28px;">
-    <img
-      src="/images/logo.png"
-      alt="The Stone Family"
-      style="height:72px;width:auto;display:block;"
-    />
-  </a>
+  <!-- BARRE PRINCIPALE -->
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:0 20px;height:72px;">
 
-  <!-- Navigation principale -->
-  <nav style="display:flex;align-items:center;flex-wrap:wrap;gap:10px 26px;font-size:13px;letter-spacing:0.07em;text-transform:uppercase;">
-    <a href="#pierre" style="color:#1a1a1a;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#C8A96A'" onmouseout="this.style.color='#1a1a1a'">{t.nav.stone}</a>
-    <a href="#carriere" style="color:#1a1a1a;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#C8A96A'" onmouseout="this.style.color='#1a1a1a'">{t.nav.quarry}</a>
-    <a href="#finitions" style="color:#1a1a1a;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#C8A96A'" onmouseout="this.style.color='#1a1a1a'">{t.nav.finishes}</a>
-    <a href="#export" style="color:#1a1a1a;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#C8A96A'" onmouseout="this.style.color='#1a1a1a'">{t.nav.export}</a>
-    <a href="#contact" style="color:#1a1a1a;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#C8A96A'" onmouseout="this.style.color='#1a1a1a'">{t.nav.contact}</a>
-  </nav>
+    <!-- Logo -->
+    <a href={locale === defaultLocale ? '/' : `/${locale}/`} style="display:flex;align-items:center;flex:none;">
+      <img src="/images/logo.png" alt="The Stone Family" style="height:56px;width:auto;display:block;" />
+    </a>
 
-  <!-- Sélecteur de langue + CTA -->
-  <div style="display:flex;align-items:center;gap:12px 18px;padding:0 28px;">
+    <!-- Navigation desktop -->
+    <nav id="nav-desktop" style="display:none;align-items:center;gap:24px;font-size:13px;letter-spacing:0.07em;text-transform:uppercase;">
+      <a href="#pierre" class="nav-link">{t.nav.stone}</a>
+      <a href="#carriere" class="nav-link">{t.nav.quarry}</a>
+      <a href="#finitions" class="nav-link">{t.nav.finishes}</a>
+      <a href="#export" class="nav-link">{t.nav.export}</a>
+      <a href="#contact" class="nav-link">{t.nav.contact}</a>
+    </nav>
+
+    <!-- Droite desktop : langues + CTA + WhatsApp -->
+    <div id="right-desktop" style="display:none;align-items:center;gap:14px;">
+      <div style="display:flex;align-items:center;gap:2px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.12em;">
+        {Object.entries(localeLabels).map(([loc, label]) => (
+          <a
+            href={switchUrl(loc)}
+            style={`padding:5px 7px;color:${loc === locale ? '#C8A96A' : 'rgba(0,0,0,0.35)'};transition:color 0.2s;text-decoration:none;`}
+            onmouseover="this.style.color='#1a1a1a'"
+            onmouseout={`this.style.color='${loc === locale ? '#C8A96A' : 'rgba(0,0,0,0.35)'}'`}
+          >{label}</a>
+        ))}
+      </div>
+      <a href="#contact"
+        style="padding:10px 20px;border:1px solid #C8A96A;color:#C8A96A;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;white-space:nowrap;transition:all 0.2s;text-decoration:none;"
+        onmouseover="this.style.background='#C8A96A';this.style.color='#fff';"
+        onmouseout="this.style.background='transparent';this.style.color='#C8A96A';"
+      >{t.cta_sample}</a>
+    </div>
+
+    <!-- Hamburger mobile -->
+    <button id="burger" aria-label="Menu" style="display:flex;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px;">
+      <span class="burger-line" style="display:block;width:24px;height:1.5px;background:#1a1a1a;transition:all 0.3s;"></span>
+      <span class="burger-line" style="display:block;width:24px;height:1.5px;background:#1a1a1a;transition:all 0.3s;"></span>
+      <span class="burger-line" style="display:block;width:24px;height:1.5px;background:#1a1a1a;transition:all 0.3s;"></span>
+    </button>
+
+  </div>
+
+  <!-- MENU MOBILE (panneau) -->
+  <div id="mobile-menu" style="display:none;flex-direction:column;background:#F2F0EC;border-top:1px solid rgba(0,0,0,0.08);padding:24px 20px 32px;">
+
+    <!-- Liens nav -->
+    <nav style="display:flex;flex-direction:column;gap:0;">
+      <a href="#pierre" class="mob-link" onclick="closeMenu()">{t.nav.stone}</a>
+      <a href="#carriere" class="mob-link" onclick="closeMenu()">{t.nav.quarry}</a>
+      <a href="#finitions" class="mob-link" onclick="closeMenu()">{t.nav.finishes}</a>
+      <a href="#export" class="mob-link" onclick="closeMenu()">{t.nav.export}</a>
+      <a href="#contact" class="mob-link" onclick="closeMenu()">{t.nav.contact}</a>
+    </nav>
 
     <!-- Langues -->
-    <div style="display:flex;align-items:center;gap:2px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.12em;">
+    <div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:24px;padding-top:20px;border-top:1px solid rgba(0,0,0,0.08);font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.12em;">
       {Object.entries(localeLabels).map(([loc, label]) => (
         <a
           href={switchUrl(loc)}
-          style={`padding:5px 7px;color:${loc === locale ? '#C8A96A' : 'rgba(0,0,0,0.4)'};transition:color 0.2s;text-decoration:none;`}
-          onmouseover="this.style.color='#1a1a1a'"
-          onmouseout={`this.style.color='${loc === locale ? '#C8A96A' : 'rgba(0,0,0,0.4)'}'`}
-        >
-          {label}
-        </a>
+          style={`padding:8px 12px;color:${loc === locale ? '#C8A96A' : 'rgba(0,0,0,0.4)'};text-decoration:none;border:1px solid ${loc === locale ? '#C8A96A' : 'rgba(0,0,0,0.12)'};`}
+        >{label}</a>
       ))}
     </div>
 
-    <!-- CTA -->
-    <a
-      href="#contact"
-      style="padding:11px 22px;border:1px solid #C8A96A;color:#C8A96A;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;white-space:nowrap;transition:all 0.2s;text-decoration:none;"
-      onmouseover="this.style.background='#C8A96A';this.style.color='#fff';"
-      onmouseout="this.style.background='transparent';this.style.color='#C8A96A';"
-    >
-      {t.cta_sample}
-    </a>
+    <!-- CTA mobile -->
+    <a href="#contact" onclick="closeMenu()"
+      style="margin-top:20px;padding:14px 20px;background:#C8A96A;color:#0B0B09;font-size:13px;letter-spacing:0.12em;text-transform:uppercase;text-align:center;text-decoration:none;display:block;"
+    >{t.cta_sample}</a>
 
-    <!-- WhatsApp -->
-    <a
-      href="https://wa.me/212660850700"
-      target="_blank"
-      rel="noopener"
-      title="WhatsApp"
-      style="display:flex;align-items:center;justify-content:center;width:40px;height:40px;background:#25D366;border-radius:50%;flex-shrink:0;transition:background 0.2s;text-decoration:none;"
-      onmouseover="this.style.background='#1ebe5d'"
-      onmouseout="this.style.background='#25D366'"
-    >
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
-        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-      </svg>
-    </a>
   </div>
 
 </header>
 
-<!-- Bouton WhatsApp flottant -->
-<a
-  href="https://wa.me/212660850700"
-  target="_blank"
-  rel="noopener"
-  title="WhatsApp"
-  style="position:fixed;bottom:28px;right:28px;z-index:999;display:flex;align-items:center;justify-content:center;width:56px;height:56px;background:#25D366;border-radius:50%;box-shadow:0 4px 16px rgba(37,211,102,0.4);transition:all 0.2s;text-decoration:none;"
-  onmouseover="this.style.transform='scale(1.1)';this.style.boxShadow='0 6px 20px rgba(37,211,102,0.5)'"
-  onmouseout="this.style.transform='scale(1)';this.style.boxShadow='0 4px 16px rgba(37,211,102,0.4)'"
->
-  <svg width="28" height="28" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
-    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-  </svg>
-</a>
+<style>
+  .nav-link {
+    color: #1a1a1a;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-link:hover { color: #C8A96A; }
+
+  .mob-link {
+    display: block;
+    padding: 16px 0;
+    font-size: 15px;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #1a1a1a;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    transition: color 0.2s;
+  }
+  .mob-link:hover { color: #C8A96A; }
+
+  /* Desktop : afficher nav + right, cacher burger */
+  @media (min-width: 900px) {
+    #nav-desktop { display: flex !important; }
+    #right-desktop { display: flex !important; }
+    #burger { display: none !important; }
+    #mobile-menu { display: none !important; }
+  }
+</style>
+
+<script>
+  const burger = document.getElementById('burger');
+  const menu = document.getElementById('mobile-menu');
+  const lines = document.querySelectorAll('.burger-line');
+  let open = false;
+
+  burger.addEventListener('click', () => {
+    open = !open;
+    menu.style.display = open ? 'flex' : 'none';
+    // Animation hamburger → croix
+    if (open) {
+      lines[0].style.transform = 'translateY(6.5px) rotate(45deg)';
+      lines[1].style.opacity = '0';
+      lines[2].style.transform = 'translateY(-6.5px) rotate(-45deg)';
+    } else {
+      lines[0].style.transform = 'none';
+      lines[1].style.opacity = '1';
+      lines[2].style.transform = 'none';
+    }
+  });
+
+  function closeMenu() {
+    open = false;
+    menu.style.display = 'none';
+    lines[0].style.transform = 'none';
+    lines[1].style.opacity = '1';
+    lines[2].style.transform = 'none';
+  }
+
+  // Fermer le menu en cliquant ailleurs
+  document.addEventListener('click', (e) => {
+    if (!document.getElementById('site-header').contains(e.target)) closeMenu();
+  });
+</script>
