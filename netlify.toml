@@ -5,42 +5,40 @@
 [build.environment]
   NODE_VERSION = "20"
 
-# Redirections par langue basées sur Accept-Language
-[[redirects]]
-  from = "/"
-  to = "/en"
-  status = 302
-  conditions = {Language = ["en"]}
-  force = false
+# ── Détection automatique par langue du navigateur ──
+# L'ordre est important : du plus spécifique au moins spécifique
 
 [[redirects]]
   from = "/"
-  to = "/it"
+  to = "/en/"
   status = 302
-  conditions = {Language = ["it"]}
   force = false
+  conditions = {Language = ["en", "en-US", "en-GB", "en-AU", "en-CA", "en-NZ", "en-ZA"]}
 
 [[redirects]]
   from = "/"
-  to = "/es"
+  to = "/it/"
   status = 302
-  conditions = {Language = ["es"]}
   force = false
+  conditions = {Language = ["it", "it-IT", "it-CH"]}
 
 [[redirects]]
   from = "/"
-  to = "/ar"
+  to = "/es/"
   status = 302
-  conditions = {Language = ["ar"]}
   force = false
+  conditions = {Language = ["es", "es-ES", "es-MX", "es-AR", "es-CO", "es-CL", "es-PE", "es-VE", "es-EC", "es-GT", "es-CU", "es-BO", "es-DO", "es-HN", "es-PY", "es-SV", "es-NI", "es-CR", "es-PA", "es-UY"]}
 
-# Formulaire Netlify Forms
 [[redirects]]
-  from = "/success"
-  to = "/"
-  status = 301
+  from = "/"
+  to = "/ar/"
+  status = 302
+  force = false
+  conditions = {Language = ["ar", "ar-SA", "ar-EG", "ar-DZ", "ar-MA", "ar-TN", "ar-LY", "ar-IQ", "ar-JO", "ar-KW", "ar-LB", "ar-OM", "ar-QA", "ar-SD", "ar-SY", "ar-YE", "ar-AE", "ar-BH"]}
 
-# Headers de sécurité
+# Français par défaut — aucune redirection nécessaire (/ = FR)
+
+# ── Headers de sécurité ──
 [[headers]]
   for = "/*"
   [headers.values]
@@ -49,7 +47,7 @@
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"
 
-# Cache assets statiques
+# ── Cache assets statiques ──
 [[headers]]
   for = "/images/*"
   [headers.values]
