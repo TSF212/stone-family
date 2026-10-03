@@ -16,7 +16,7 @@ export const es = {
 
   hero: {
     eyebrow: 'Cantera única · Atlas Medio, Marruecos',
-    h1: 'El negro absoluto,\nsin una sola vena.',
+    h1: "Mármol negro de Marruecos,\nsin una sola veta.",
     lead: 'Un mármol negro monocromático de rara pureza, extraído de un único yacimiento del Atlas marroquí. Bloques, losas, baldosas y productos terminados, entregados en todo el mundo.',
     cta_primary: 'Descubrir la piedra',
     cta_secondary: 'Solicitar presupuesto',
@@ -139,7 +139,7 @@ export const es = {
   },
 
   meta: {
-    title: 'The Stone Family — Mármol Negro Absoluto · Atlas Medio, Marruecos',
-    description: 'Productor directo de mármol negro absoluto sin venas, extraído del Atlas Medio marroquí. Bloques, losas, baldosas, funerario, adoquines y gravilla. Exportación internacional.',
+    title: "Mármol negro de Marruecos — Bloques y losas | The Stone Family",
+    description: "Productor de mármol negro del Atlas Medio, Marruecos. Bloques, losas, baldosas y piedra acabada para profesionales. Exportación internacional. Solicite presupuesto.",
   },
 };

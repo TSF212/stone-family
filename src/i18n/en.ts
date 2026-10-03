@@ -16,7 +16,7 @@ export const en = {
 
   hero: {
     eyebrow: 'Single quarry · Middle Atlas, Morocco',
-    h1: 'Absolute black,\nnot a single vein.',
+    h1: "Black marble from Morocco,\nwithout a single vein.",
     lead: 'A rare monochromatic black marble from a single deposit in the Moroccan Atlas. Raw blocks, slabs, tiles and finished products, shipped worldwide.',
     cta_primary: 'Discover the stone',
     cta_secondary: 'Request a quote',
@@ -139,7 +139,7 @@ export const en = {
   },
 
   meta: {
-    title: 'The Stone Family — Absolute Black Marble · Middle Atlas, Morocco',
-    description: 'Direct producer of vein-free absolute black marble from the Moroccan Middle Atlas. Blocks, slabs, tiles, funerary, paving and gravel. International export.',
+    title: "Moroccan Black Marble — Blocks & Slabs | The Stone Family",
+    description: "Black marble producer in the Middle Atlas, Morocco. Blocks, slabs, tiles and finished stone for professionals. International export. Request a quote.",
   },
 };

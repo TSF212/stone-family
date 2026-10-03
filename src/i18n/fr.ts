@@ -16,7 +16,7 @@ export const fr = {
 
   hero: {
     eyebrow: 'Carrière unique · Moyen Atlas, Maroc',
-    h1: 'Le noir absolu,\nsans une seule veine.',
+    h1: "Marbre noir du Maroc,\nsans une seule veine.",
     lead: "Un marbre noir monochrome d'une pureté rare, extrait d'un unique gisement de l'Atlas marocain. Blocs, tranches, carreaux et produits finis, livrés dans le monde entier.",
     cta_primary: 'Découvrir la pierre',
     cta_secondary: 'Demander un devis',
@@ -139,7 +139,7 @@ export const fr = {
   },
 
   meta: {
-    title: 'The Stone Family — Marbre Noir Absolu · Moyen Atlas, Maroc',
-    description: "Producteur direct de marbre noir absolu sans veines, extrait du Moyen Atlas marocain. Blocs, tranches, carreaux, funéraire, pavés et gravillon. Export international.",
+    title: "Marbre noir du Maroc — Blocs et tranches | The Stone Family",
+    description: "Producteur de marbre noir du Moyen Atlas, Maroc. Blocs, tranches, carreaux et produits finis pour professionnels. Export international. Demandez un devis.",
   },
 };

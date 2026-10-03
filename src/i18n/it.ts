@@ -16,7 +16,7 @@ export const it = {
 
   hero: {
     eyebrow: 'Cava unica · Medio Atlante, Marocco',
-    h1: 'Il nero assoluto,\nsenza una sola venatura.',
+    h1: "Marmo nero del Marocco,\nsenza una sola venatura.",
     lead: 'Un marmo nero monocromatico di rara purezza, estratto da un unico giacimento dell\'Atlante marocchino. Blocchi, lastre, piastrelle e prodotti finiti, consegnati in tutto il mondo.',
     cta_primary: 'Scoprire la pietra',
     cta_secondary: 'Richiedere un preventivo',
@@ -139,7 +139,7 @@ export const it = {
   },
 
   meta: {
-    title: 'The Stone Family — Marmo Nero Assoluto · Medio Atlante, Marocco',
-    description: 'Produttore diretto di marmo nero assoluto senza venature, estratto dal Medio Atlante marocchino. Blocchi, lastre, piastrelle, funerario, pavé e ghiaia. Export internazionale.',
+    title: "Marmo nero del Marocco — Blocchi e lastre | The Stone Family",
+    description: "Produttore di marmo nero nel Medio Atlante, Marocco. Blocchi, lastre, piastrelle e prodotti finiti per professionisti. Export internazionale. Richiedi un preventivo.",
   },
 };
