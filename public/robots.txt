@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://thestonefamily.ma/sitemap-index.xml
