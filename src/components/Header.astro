@@ -28,7 +28,7 @@ function switchUrl(loc: string) {
 
     <!-- Logo -->
     <a href={locale === defaultLocale ? '/' : `/${locale}/`} class="brand">
-      <img src="/images/logo.png" alt="The Stone Family" width="250" height="80" />
+      <img src="/images/logo-header.svg" alt="The Stone Family" width="250" height="80" />
     </a>
 
     <!-- Navigation desktop -->
@@ -111,7 +111,7 @@ function switchUrl(loc: string) {
 <style>
   .header-main { display:flex;align-items:center;gap:28px;padding:0 28px;min-height:100px; }
   .brand { display:flex;align-items:center;flex:none; }
-  .brand img { width:250px;height:80px;object-fit:cover;display:block; }
+  .brand img { width:250px;height:80px;object-fit:contain;display:block; }
   #nav-desktop { margin-inline-start:auto; }
   #right-desktop { flex:none; }
   #burger { margin-inline-start:auto; }
