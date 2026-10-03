@@ -7,9 +7,10 @@ interface Props {
   description: string;
   locale: Locale;
   canonicalPath?: string;
+  availableLocales?: Locale[];
 }
 
-const { title, description, locale, canonicalPath = '' } = Astro.props;
+const { title, description, locale, canonicalPath = '', availableLocales = locales } = Astro.props;
 const site = Astro.site!.origin;
 
 // Génère les URLs hreflang pour toutes les locales
@@ -33,7 +34,7 @@ const isRtl = locale === 'ar';
   <link rel="canonical" href={hrefForLocale(locale)} />
 
   <!-- hreflang — SEO multilingue -->
-  {locales.map((loc) => (
+  {availableLocales.map((loc) => (
     <link rel="alternate" hreflang={loc} href={hrefForLocale(loc)} />
   ))}
   <link rel="alternate" hreflang="x-default" href={hrefForLocale(defaultLocale)} />
