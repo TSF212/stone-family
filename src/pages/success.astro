@@ -1,5 +1,6 @@
 ---
 import Analytics from '../components/Analytics.astro';
+import Theme from '../components/Theme.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import { t, type Locale } from '../i18n/index';
@@ -112,10 +113,10 @@ const successContent = {
   },
 };
 
-const accent = '#C8A96A';
-const dark = '#0B0B09';
-const light = '#EDEBE4';
-const muted = 'rgba(237,235,228,0.55)';
+const accent = '#24483E';
+const dark = '#F5F3ED';
+const light = '#252824';
+const muted = 'rgba(37,40,36,0.55)';
 const monoFont = "'IBM Plex Mono','Noto Kufi Arabic',monospace";
 const titleFont = "'Archivo','Noto Kufi Arabic',system-ui,sans-serif";
 const bodyFont = "'Barlow','Noto Kufi Arabic',system-ui,sans-serif";
@@ -133,25 +134,25 @@ const bodyFont = "'Barlow','Noto Kufi Arabic',system-ui,sans-serif";
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Barlow:wght@300;400;500&family=IBM+Plex+Mono:wght@400&family=Noto+Kufi+Arabic:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-    body{background:#0B0B09;color:#EDEBE4;font-family:'Barlow','Noto Kufi Arabic',system-ui,sans-serif;font-weight:300;-webkit-font-smoothing:antialiased;}
+    body{background:#F5F3ED;color:#252824;font-family:'Barlow','Noto Kufi Arabic',system-ui,sans-serif;font-weight:300;-webkit-font-smoothing:antialiased;}
     a{color:inherit;text-decoration:none;}
   </style>
 </head>
 <body>
 
 <!-- Header complet -->
-<header style="position:sticky;top:0;z-index:50;display:flex;align-items:stretch;justify-content:space-between;gap:28px;background:#F2F0EC;border-bottom:1px solid rgba(0,0,0,0.08);">
+<header style="position:sticky;top:0;z-index:50;display:flex;align-items:stretch;justify-content:space-between;gap:28px;background:#E8E3D9;border-bottom:1px solid rgba(0,0,0,0.08);">
 
   <a href="/" style="display:flex;align-items:center;flex:none;padding:0 28px;">
     <img src="/images/logo.png" alt="The Stone Family" style="height:72px;width:auto;display:block;" />
   </a>
 
   <nav style="display:flex;align-items:center;flex-wrap:wrap;gap:10px 26px;font-size:13px;letter-spacing:0.07em;text-transform:uppercase;">
-    <a href="/#pierre" style="color:#1a1a1a;text-decoration:none;" onmouseover="this.style.color='#C8A96A'" onmouseout="this.style.color='#1a1a1a'">La pierre</a>
-    <a href="/#carriere" style="color:#1a1a1a;text-decoration:none;" onmouseover="this.style.color='#C8A96A'" onmouseout="this.style.color='#1a1a1a'">La carrière</a>
-    <a href="/#finitions" style="color:#1a1a1a;text-decoration:none;" onmouseover="this.style.color='#C8A96A'" onmouseout="this.style.color='#1a1a1a'">Finitions</a>
-    <a href="/#export" style="color:#1a1a1a;text-decoration:none;" onmouseover="this.style.color='#C8A96A'" onmouseout="this.style.color='#1a1a1a'">Export</a>
-    <a href="/#contact" style="color:#1a1a1a;text-decoration:none;" onmouseover="this.style.color='#C8A96A'" onmouseout="this.style.color='#1a1a1a'">Contact</a>
+    <a href="/#pierre" style="color:#1a1a1a;text-decoration:none;" onmouseover="this.style.color='#24483E'" onmouseout="this.style.color='#1a1a1a'">La pierre</a>
+    <a href="/#carriere" style="color:#1a1a1a;text-decoration:none;" onmouseover="this.style.color='#24483E'" onmouseout="this.style.color='#1a1a1a'">La carrière</a>
+    <a href="/#finitions" style="color:#1a1a1a;text-decoration:none;" onmouseover="this.style.color='#24483E'" onmouseout="this.style.color='#1a1a1a'">Finitions</a>
+    <a href="/#export" style="color:#1a1a1a;text-decoration:none;" onmouseover="this.style.color='#24483E'" onmouseout="this.style.color='#1a1a1a'">Export</a>
+    <a href="/#contact" style="color:#1a1a1a;text-decoration:none;" onmouseover="this.style.color='#24483E'" onmouseout="this.style.color='#1a1a1a'">Contact</a>
   </nav>
 
   <div style="display:flex;align-items:center;gap:12px 18px;padding:0 28px;">
@@ -160,7 +161,7 @@ const bodyFont = "'Barlow','Noto Kufi Arabic',system-ui,sans-serif";
         <button
           onclick={`showLang('${loc}')`}
           id={`btn-${loc}`}
-          style={`padding:5px 9px;background:transparent;border:none;cursor:pointer;color:${loc === 'fr' ? '#C8A96A' : 'rgba(0,0,0,0.35)'};font-family:inherit;font-size:inherit;letter-spacing:inherit;`}
+          style={`padding:5px 9px;background:transparent;border:none;cursor:pointer;color:${loc === 'fr' ? '#24483E' : 'rgba(0,0,0,0.35)'};font-family:inherit;font-size:inherit;letter-spacing:inherit;`}
         >
           {loc.toUpperCase()}
         </button>
@@ -180,12 +181,12 @@ const bodyFont = "'Barlow','Noto Kufi Arabic',system-ui,sans-serif";
   <div id={`lang-${lang}`} style={`display:${lang === 'fr' ? 'block' : 'none'};`} dir={lang === 'ar' ? 'rtl' : 'ltr'}>
 
     <!-- HERO CONFIRMATION -->
-    <section style={`padding:80px 40px 64px;border-bottom:1px solid rgba(237,235,228,0.09);display:flex;flex-direction:column;align-items:center;text-align:center;`}>
+    <section style={`padding:80px 40px 64px;border-bottom:1px solid rgba(37,40,36,0.09);display:flex;flex-direction:column;align-items:center;text-align:center;`}>
       <div style={`width:64px;height:64px;border:1px solid rgba(200,169,106,0.4);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:28px;color:${accent};font-size:26px;`}>✓</div>
       <div style={`font-family:${monoFont};font-size:10px;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:${accent};margin-bottom:20px;display:flex;align-items:center;gap:10px;`}>
-        <span style="display:inline-block;width:20px;height:1px;background:#C8A96A;"></span>
+        <span style="display:inline-block;width:20px;height:1px;background:#24483E;"></span>
         {c.tag}
-        <span style="display:inline-block;width:20px;height:1px;background:#C8A96A;"></span>
+        <span style="display:inline-block;width:20px;height:1px;background:#24483E;"></span>
       </div>
       <h1 style={`font-family:${titleFont};font-weight:500;font-size:clamp(32px,4vw,52px);line-height:1.06;letter-spacing:-0.022em;margin:0 0 20px;white-space:pre-line;`}>{c.h1}</h1>
       <p style={`font-size:17px;font-weight:300;line-height:1.75;color:${muted};max-width:46ch;margin:0 0 36px;`}>{c.lead}</p>
@@ -201,24 +202,24 @@ const bodyFont = "'Barlow','Noto Kufi Arabic',system-ui,sans-serif";
     </section>
 
     <!-- STATS -->
-    <section style="display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid rgba(237,235,228,0.09);">
+    <section style="display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid rgba(37,40,36,0.09);">
       {c.stats.map((s, i) => (
-        <div style={`padding:36px 28px;${i < 2 ? 'border-right:1px solid rgba(237,235,228,0.09);' : ''}`}>
+        <div style={`padding:36px 28px;${i < 2 ? 'border-right:1px solid rgba(37,40,36,0.09);' : ''}`}>
           <div style={`font-family:${titleFont};font-weight:500;font-size:clamp(28px,3vw,40px);letter-spacing:-0.022em;line-height:1;color:${accent};margin-bottom:10px;`}>{s.v}</div>
-          <div style={`font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:rgba(237,235,228,0.4);line-height:1.5;`}>{s.l}</div>
+          <div style={`font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:rgba(37,40,36,0.4);line-height:1.5;`}>{s.l}</div>
         </div>
       ))}
     </section>
 
     <!-- PRODUITS -->
-    <section style="padding:56px 40px;border-bottom:1px solid rgba(237,235,228,0.09);">
+    <section style="padding:56px 40px;border-bottom:1px solid rgba(37,40,36,0.09);">
       <div style={`font-family:${monoFont};font-size:10px;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:${accent};margin-bottom:24px;`}>{c.prods_label}</div>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(237,235,228,0.09);border:1px solid rgba(237,235,228,0.09);">
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(37,40,36,0.09);border:1px solid rgba(37,40,36,0.09);">
         {c.prods.map((p) => (
-          <div style="background:#0B0B09;padding:28px 24px;">
+          <div style="background:#F5F3ED;padding:28px 24px;">
             <div style={`font-family:${monoFont};font-size:9px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:${accent};border-bottom:1px solid rgba(200,169,106,0.3);padding-bottom:3px;display:inline-block;margin-bottom:14px;`}>{p.tag}</div>
             <div style={`font-family:${titleFont};font-weight:500;font-size:16px;color:${light};margin-bottom:8px;`}>{p.n}</div>
-            <div style={`font-family:${monoFont};font-size:12px;color:rgba(237,235,228,0.4);line-height:1.6;margin-bottom:14px;`}>{p.d}</div>
+            <div style={`font-family:${monoFont};font-size:12px;color:rgba(37,40,36,0.4);line-height:1.6;margin-bottom:14px;`}>{p.d}</div>
             <a href="/" style={`font-size:11px;font-weight:500;letter-spacing:1px;text-transform:uppercase;color:${accent};`}>{p.lnk}</a>
           </div>
         ))}
@@ -226,9 +227,9 @@ const bodyFont = "'Barlow','Noto Kufi Arabic',system-ui,sans-serif";
     </section>
 
     <!-- RETOUR ACCUEIL -->
-    <a href="/" style={`display:block;text-align:center;padding:24px 40px;font-family:${bodyFont};font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(237,235,228,0.4);border-top:1px solid rgba(237,235,228,0.06);transition:color 0.2s;`}
+    <a href="/" style={`display:block;text-align:center;padding:24px 40px;font-family:${bodyFont};font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(37,40,36,0.4);border-top:1px solid rgba(37,40,36,0.06);transition:color 0.2s;`}
       onmouseover={`this.style.color='${accent}'`}
-      onmouseout="this.style.color='rgba(237,235,228,0.4)'"
+      onmouseout="this.style.color='rgba(37,40,36,0.4)'"
     >
       {c.back}
     </a>
@@ -241,7 +242,7 @@ function showLang(lang) {
   ['fr','en','it','es','ar'].forEach(function(l) {
     document.getElementById('lang-' + l).style.display = l === lang ? 'block' : 'none';
     var btn = document.getElementById('btn-' + l);
-    btn.style.color = l === lang ? '#C8A96A' : 'rgba(0,0,0,0.35)';
+    btn.style.color = l === lang ? '#24483E' : 'rgba(0,0,0,0.35)';
   });
 }
 // Détection automatique de la langue du navigateur
@@ -250,6 +251,7 @@ var supported = ['fr','en','it','es','ar'];
 if (supported.includes(browserLang)) showLang(browserLang);
 </script>
 
-<Analytics locale={locale} />
+<Theme />
+  <Analytics locale={locale} />
 </body>
 </html>
