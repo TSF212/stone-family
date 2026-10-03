@@ -1,8 +1,14 @@
 ---
+import { locales, type Locale } from '../i18n/index';
+import { supplyContent, supplyUrl } from '../i18n/supply';
+
 interface Props {
   t: any;
 }
 const { t } = Astro.props;
+const pathLocale = Astro.url.pathname.split('/')[1];
+const supplyLocale: Locale = locales.includes(pathLocale as Locale) ? pathLocale as Locale : 'fr';
+const supplyCopy = supplyContent[supplyLocale];
 const accent = '#C8A96A';
 const dark = '#0B0B09';
 const light = '#EDEBE4';
@@ -314,15 +320,15 @@ const ph = (label: string) => `
 </div>
 
 <!-- ══ LA PIERRE ═════════════════════════════ -->
-{Astro.url.pathname === '/' && <section class="section-dark" aria-labelledby="supply-title">
-  <div class="section-label on-dark">Approvisionnement professionnel</div>
-  <h2 class="h2-dark" id="supply-title">Préparez votre commande de marbre noir</h2>
-  <p class="lead-dark">Gabarits de sciage, dimensions utiles, quantité et destination : retrouvez les informations à réunir pour votre achat.</p>
+<section class="section-dark" aria-labelledby="supply-title">
+  <div class="section-label on-dark">{supplyCopy.label}</div>
+  <h2 class="h2-dark" id="supply-title">{supplyCopy.homeTitle}</h2>
+  <p class="lead-dark">{supplyCopy.homeLead}</p>
   <div class="hero-actions" style="margin-top:28px">
-    <a class="btn-primary" href="/blocs-marbre-noir/">Choisir des blocs →</a>
-    <a class="btn-secondary" href="/tranches-marbre-noir/">Commander des tranches →</a>
+    <a class="btn-primary" href={supplyUrl(supplyLocale, 'blocks')}>{supplyCopy.homeBlocks} <span aria-hidden="true">{supplyLocale === 'ar' ? '←' : '→'}</span></a>
+    <a class="btn-secondary" href={supplyUrl(supplyLocale, 'slabs')}>{supplyCopy.homeSlabs} <span aria-hidden="true">{supplyLocale === 'ar' ? '←' : '→'}</span></a>
   </div>
-</section>}
+</section>
 <section class="section-light" id="pierre">
   <div class="section-label on-light">{t.stone.label}</div>
   <div class="grid-2" style="align-items:start;">
