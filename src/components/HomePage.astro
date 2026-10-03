@@ -10,6 +10,7 @@ const pathLocale = Astro.url.pathname.split('/')[1];
 const supplyLocale: Locale = locales.includes(pathLocale as Locale) ? pathLocale as Locale : 'fr';
 const supplyCopy = supplyContent[supplyLocale];
 const heroImageAlt: Record<Locale, string> = { fr: 'Illustration : hall hôtel, sol en marbre noir uni poli et joints anthracite', en: 'Illustration of a hotel lobby with polished veinless black marble flooring and anthracite joints', it: 'Illustrazione di marmo nero senza venature con finitura lucidata a specchio', es: 'Ilustración de mármol negro sin vetas con acabado pulido espejo', ar: 'صورة توضيحية لرخام أسود خالٍ من العروق بلمسة مصقولة كالمرآة' };
+const illustrationLabels: Record<Locale, string> = { fr: 'Illustration', en: 'Illustration', it: 'Illustrazione', es: 'Ilustración', ar: 'صورة توضيحية' };
 const accent = '#24483E';
 const dark = '#F5F3ED';
 const light = '#252824';
@@ -239,6 +240,7 @@ const ph = (label: string) => `
 
   /* ── RÉFÉRENCES ───────────────────────────── */
   .ref-card { }
+  .ref-photo { display:block; width:100%; height:auto; aspect-ratio:4/3; object-fit:cover; object-position:center 65%; }
   .ref-info { display: flex; justify-content: space-between; align-items: baseline; padding: 16px 0 0; }
   .ref-name { font-family: 'Archivo', system-ui, sans-serif; font-weight: 500; font-size: 15px; color: #252824; }
   .ref-loc { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: rgba(37,40,36,0.4); }
@@ -424,10 +426,10 @@ const ph = (label: string) => `
   <div class="grid-3">
     {t.works.items.map((w: any) => (
       <div class="ref-card">
-        <div class="img-ph"><span>{w.img} — {w.n}</span></div>
+        {w.img === 'ref_hotel.jpg' ? <img class="ref-photo" src="/images/hall-hotel-marbre-noir-1120.webp" alt={`${w.n} — ${illustrationLabels[supplyLocale]}`} width="1120" height="1400" loading="lazy" decoding="async" /> : <div class="img-ph"><span>{w.img} — {w.n}</span></div>}
         <div class="ref-info">
           <span class="ref-name">{w.n}</span>
-          <span class="ref-loc">{w.loc}</span>
+          <span class="ref-loc">{w.img === 'ref_hotel.jpg' ? illustrationLabels[supplyLocale] : w.loc}</span>
         </div>
       </div>
     ))}
