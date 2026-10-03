@@ -9,7 +9,7 @@ const { t } = Astro.props;
 const pathLocale = Astro.url.pathname.split('/')[1];
 const supplyLocale: Locale = locales.includes(pathLocale as Locale) ? pathLocale as Locale : 'fr';
 const supplyCopy = supplyContent[supplyLocale];
-const heroImageAlt: Record<Locale, string> = { fr: 'Illustration de marbre noir uni sans veines, finition polie miroir', en: 'Illustration of veinless black marble with a mirror-polished finish', it: 'Illustrazione di marmo nero senza venature con finitura lucidata a specchio', es: 'Ilustración de mármol negro sin vetas con acabado pulido espejo', ar: 'صورة توضيحية لرخام أسود خالٍ من العروق بلمسة مصقولة كالمرآة' };
+const heroImageAlt: Record<Locale, string> = { fr: 'Illustration : hall hôtel, sol en marbre noir uni poli et joints anthracite', en: 'Illustration of a hotel lobby with polished veinless black marble flooring and anthracite joints', it: 'Illustrazione di marmo nero senza venature con finitura lucidata a specchio', es: 'Ilustración de mármol negro sin vetas con acabado pulido espejo', ar: 'صورة توضيحية لرخام أسود خالٍ من العروق بلمسة مصقولة كالمرآة' };
 const accent = '#24483E';
 const dark = '#F5F3ED';
 const light = '#252824';
@@ -109,7 +109,7 @@ const ph = (label: string) => `
     padding: 20px;
   }
   .hero-img { position: relative; overflow: hidden; padding: 0; min-width: 0; aspect-ratio: 4 / 3; }
-  .hero-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 57% center; display: block; }
+  .hero-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 65%; display: block; }
   @media (min-width: 900px) { .hero-img { aspect-ratio: auto; } }
   .hero-img span {
     font-family: 'IBM Plex Mono', monospace;
@@ -309,7 +309,7 @@ const ph = (label: string) => `
       <a href="#contact" class="btn-secondary">{t.hero.cta_secondary}</a>
     </div>
   </div>
-  <div class="hero-img"><img class="hero-photo" src="/images/marbre-noir-poli-1280.webp" srcset="/images/marbre-noir-poli-640.webp 640w, /images/marbre-noir-poli-1280.webp 1280w, /images/marbre-noir-poli-1920.webp 1920w" sizes="(min-width: 900px) 48vw, 100vw" width="1942" height="809" alt={heroImageAlt[supplyLocale]} loading="eager" fetchpriority="high" decoding="async" /></div>
+  <div class="hero-img"><img class="hero-photo" src="/images/hall-hotel-marbre-noir-1120.webp" srcset="/images/hall-hotel-marbre-noir-640.webp 640w, /images/hall-hotel-marbre-noir-1120.webp 1120w" sizes="(min-width: 900px) 48vw, 100vw" width="1122" height="1402" alt={heroImageAlt[supplyLocale]} loading="eager" fetchpriority="high" decoding="async" /></div>
 </section>
 
 <!-- ══ STATS ═════════════════════════════════ -->
