@@ -314,6 +314,15 @@ const ph = (label: string) => `
 </div>
 
 <!-- ══ LA PIERRE ═════════════════════════════ -->
+{Astro.url.pathname === '/' && <section class="section-dark" aria-labelledby="supply-title">
+  <div class="section-label on-dark">Approvisionnement professionnel</div>
+  <h2 class="h2-dark" id="supply-title">Préparez votre commande de marbre noir</h2>
+  <p class="lead-dark">Gabarits de sciage, dimensions utiles, quantité et destination : retrouvez les informations à réunir pour votre achat.</p>
+  <div class="hero-actions" style="margin-top:28px">
+    <a class="btn-primary" href="/blocs-marbre-noir/">Choisir des blocs →</a>
+    <a class="btn-secondary" href="/tranches-marbre-noir/">Commander des tranches →</a>
+  </div>
+</section>}
 <section class="section-light" id="pierre">
   <div class="section-label on-light">{t.stone.label}</div>
   <div class="grid-2" style="align-items:start;">
