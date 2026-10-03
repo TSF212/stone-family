@@ -9,7 +9,7 @@ interface Props {
 }
 
 const { title, description, locale, canonicalPath = '' } = Astro.props;
-const site = 'https://thestonefamily.com';
+const site = Astro.site!.origin;
 
 // Génère les URLs hreflang pour toutes les locales
 function hrefForLocale(loc: string) {
@@ -42,7 +42,7 @@ const isRtl = locale === 'ar';
   <meta property="og:description" content={description} />
   <meta property="og:type" content="website" />
   <meta property="og:url" content={hrefForLocale(locale)} />
-  <meta property="og:image" content={`${site}/images/og-image.jpg`} />
+  <meta property="og:image" content={`${site}/images/logo.png`} />
 
   <!-- Fonts — Google Fonts (Archivo + Barlow + IBM Plex Mono) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -53,28 +53,26 @@ const isRtl = locale === 'ar';
   />
 
   <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/png" href="/images/logo.png" />
 
   <!-- Structured data — Organization -->
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "The Stone Family",
-      "url": "https://thestonefamily.com",
-      "logo": "https://thestonefamily.com/images/logo.png",
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "contactType": "sales",
-        "availableLanguage": ["French", "English", "Italian", "Spanish", "Arabic"]
-      },
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Béni Mellal",
-        "addressCountry": "MA"
-      }
-    }
-  </script>
+  <script type="application/ld+json" set:html={JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'The Stone Family',
+    url: site,
+    logo: `${site}/images/logo.png`,
+    contactPoint: {
+      '@type': 'ContactPoint',
+      contactType: 'sales',
+      availableLanguage: ['French', 'English', 'Italian', 'Spanish', 'Arabic'],
+    },
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Béni Mellal',
+      addressCountry: 'MA',
+    },
+  })} />
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
