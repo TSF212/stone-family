@@ -1,5 +1,6 @@
 ---
 import { localeLabels, defaultLocale, type Locale } from '../i18n/index';
+import { supplyUrl } from '../i18n/supply';
 
 interface Props {
   t: any;
@@ -8,6 +9,11 @@ interface Props {
 }
 
 const { t, locale, currentPath = '' } = Astro.props;
+const productLabels: Record<Locale, [string, string]> = {
+  fr: ['Blocs', 'Tranches'], en: ['Blocks', 'Slabs'], it: ['Blocchi', 'Lastre'],
+  es: ['Bloques', 'Tablas'], ar: ['الكتل', 'الألواح'],
+};
+const [blocksLabel, slabsLabel] = productLabels[locale];
 
 function switchUrl(loc: string) {
   if (loc === defaultLocale) return `/${currentPath}`;
@@ -26,7 +32,9 @@ function switchUrl(loc: string) {
     </a>
 
     <!-- Navigation desktop -->
-    <nav id="nav-desktop" style="display:none;align-items:center;gap:24px;font-size:13px;letter-spacing:0.07em;text-transform:uppercase;">
+    <nav id="nav-desktop" style="display:none;align-items:center;gap:16px;font-size:13px;letter-spacing:0.05em;text-transform:uppercase;">
+      <a href={supplyUrl(locale, 'blocks')} class="nav-link">{blocksLabel}</a>
+      <a href={supplyUrl(locale, 'slabs')} class="nav-link">{slabsLabel}</a>
       <a href="#pierre" class="nav-link">{t.nav.stone}</a>
       <a href="#carriere" class="nav-link">{t.nav.quarry}</a>
       <a href="#finitions" class="nav-link">{t.nav.finishes}</a>
@@ -54,7 +62,7 @@ function switchUrl(loc: string) {
     </div>
 
     <!-- Hamburger mobile -->
-    <button id="burger" aria-label="Menu" style="display:flex;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px;">
+    <button id="burger" aria-label="Menu" aria-controls="mobile-menu" aria-expanded="false" style="display:flex;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px;">
       <span class="burger-line" style="display:block;width:24px;height:1.5px;background:#1a1a1a;transition:all 0.3s;"></span>
       <span class="burger-line" style="display:block;width:24px;height:1.5px;background:#1a1a1a;transition:all 0.3s;"></span>
       <span class="burger-line" style="display:block;width:24px;height:1.5px;background:#1a1a1a;transition:all 0.3s;"></span>
@@ -62,16 +70,23 @@ function switchUrl(loc: string) {
 
   </div>
 
+  <nav class="supply-shortcuts" aria-label={locale === 'fr' ? 'Blocs et tranches' : `${blocksLabel} · ${slabsLabel}`}>
+    <a href={supplyUrl(locale, 'blocks')}>{blocksLabel} <span aria-hidden="true">{locale === 'ar' ? '←' : '→'}</span></a>
+    <a href={supplyUrl(locale, 'slabs')}>{slabsLabel} <span aria-hidden="true">{locale === 'ar' ? '←' : '→'}</span></a>
+  </nav>
+
   <!-- MENU MOBILE (panneau) -->
   <div id="mobile-menu" style="display:none;flex-direction:column;background:#F2F0EC;border-top:1px solid rgba(0,0,0,0.08);padding:24px 20px 32px;">
 
     <!-- Liens nav -->
     <nav style="display:flex;flex-direction:column;gap:0;">
-      <a href="#pierre" class="mob-link" onclick="closeMenu()">{t.nav.stone}</a>
-      <a href="#carriere" class="mob-link" onclick="closeMenu()">{t.nav.quarry}</a>
-      <a href="#finitions" class="mob-link" onclick="closeMenu()">{t.nav.finishes}</a>
-      <a href="#export" class="mob-link" onclick="closeMenu()">{t.nav.export}</a>
-      <a href="#contact" class="mob-link" onclick="closeMenu()">{t.nav.contact}</a>
+      <a href={supplyUrl(locale, 'blocks')} class="mob-link">{blocksLabel}</a>
+      <a href={supplyUrl(locale, 'slabs')} class="mob-link">{slabsLabel}</a>
+      <a href="#pierre" class="mob-link">{t.nav.stone}</a>
+      <a href="#carriere" class="mob-link">{t.nav.quarry}</a>
+      <a href="#finitions" class="mob-link">{t.nav.finishes}</a>
+      <a href="#export" class="mob-link">{t.nav.export}</a>
+      <a href="#contact" class="mob-link">{t.nav.contact}</a>
     </nav>
 
     <!-- Langues -->
@@ -85,7 +100,7 @@ function switchUrl(loc: string) {
     </div>
 
     <!-- CTA mobile -->
-    <a href="#contact" onclick="closeMenu()"
+    <a href="#contact"
       style="margin-top:20px;padding:14px 20px;background:#C8A96A;color:#0B0B09;font-size:13px;letter-spacing:0.12em;text-transform:uppercase;text-align:center;text-decoration:none;display:block;"
     >{t.cta_sample}</a>
 
@@ -94,6 +109,9 @@ function switchUrl(loc: string) {
 </header>
 
 <style>
+  .supply-shortcuts { display:flex;gap:28px;padding:12px 20px;border-top:1px solid rgba(0,0,0,0.08);color:#1a1a1a;font-size:14px;letter-spacing:0.06em; }
+  .supply-shortcuts a:hover { color:#755728; }
+  .nav-link, .supply-shortcuts a { white-space:nowrap; }
   .nav-link {
     color: #1a1a1a;
     text-decoration: none;
@@ -116,11 +134,12 @@ function switchUrl(loc: string) {
   .mob-link:hover { color: #C8A96A; }
 
   /* Desktop : afficher nav + right, cacher burger */
-  @media (min-width: 900px) {
+  @media (min-width: 1200px) {
     #nav-desktop { display: flex !important; }
     #right-desktop { display: flex !important; }
     #burger { display: none !important; }
     #mobile-menu { display: none !important; }
+    .supply-shortcuts { display: none; }
   }
 </style>
 
@@ -132,6 +151,7 @@ function switchUrl(loc: string) {
 
   burger.addEventListener('click', () => {
     open = !open;
+    burger.setAttribute('aria-expanded', String(open));
     menu.style.display = open ? 'flex' : 'none';
     // Animation hamburger → croix
     if (open) {
@@ -147,11 +167,14 @@ function switchUrl(loc: string) {
 
   function closeMenu() {
     open = false;
+    burger.setAttribute('aria-expanded', 'false');
     menu.style.display = 'none';
     lines[0].style.transform = 'none';
     lines[1].style.opacity = '1';
     lines[2].style.transform = 'none';
   }
+
+  menu.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
 
   // Fermer le menu en cliquant ailleurs
   document.addEventListener('click', (e) => {
