@@ -1,0 +1,84 @@
+---
+const { locale = 'fr' } = Astro.props;
+const labels = {
+  fr: ['Autoriser les statistiques de visite pour améliorer le site ?', 'Accepter', 'Refuser', 'Préférences de confidentialité'],
+  en: ['Allow visitor statistics to help improve this website?', 'Accept', 'Decline', 'Privacy preferences'],
+  it: ['Consentire le statistiche di visita per migliorare il sito?', 'Accetta', 'Rifiuta', 'Preferenze privacy'],
+  es: ['¿Permitir estadísticas de visitas para mejorar el sitio?', 'Aceptar', 'Rechazar', 'Preferencias de privacidad'],
+  ar: ['هل تسمح بإحصاءات الزيارات لتحسين الموقع؟', 'قبول', 'رفض', 'تفضيلات الخصوصية'],
+};
+const copy = labels[locale as keyof typeof labels] || labels.fr;
+---
+<aside id="analytics-choice" aria-label={copy[3]} hidden>
+  <p>{copy[0]}</p>
+  <button type="button" id="analytics-accept">{copy[1]}</button>
+  <button type="button" id="analytics-decline">{copy[2]}</button>
+</aside>
+<button type="button" id="analytics-preferences">{copy[3]}</button>
+<style>
+  #analytics-choice { position:fixed; bottom:88px; left:16px; right:16px; z-index:1001; padding:20px; background:#f2f0ec; color:#16150f; border:1px solid #c8a96a; max-width:540px; box-shadow:0 4px 20px #0003; }
+  #analytics-choice[hidden] { display:none; }
+  #analytics-choice p { margin-bottom:12px; }
+  #analytics-choice button { padding:10px 18px; margin:4px; border:1px solid #16150f; background:transparent; color:#16150f; }
+  #analytics-preferences { position:relative; display:block; margin:12px auto; padding:8px; font-size:12px; background:transparent; color:inherit; border:0; text-decoration:underline; }
+</style>
+<script is:inline>
+(() => {
+  const id = 'G-6CDZPQVD99';
+  const consentKey = 'tsf-analytics-consent';
+  const pendingKey = 'tsf-pending-lead';
+  const banner = document.getElementById('analytics-choice');
+  let active = false;
+  const get = (storage, key) => { try { return storage.getItem(key); } catch { return null; } };
+  const set = (storage, key, value) => { try { storage.setItem(key, value); } catch {} };
+  const remove = (storage, key) => { try { storage.removeItem(key); } catch {} };
+  const lang = document.documentElement.lang || 'fr';
+  const track = (name, params = {}) => {
+    if (!active) return;
+    window.gtag('event', name, { ...params, page_location: location.origin + location.pathname, language: lang });
+  };
+  const confirmLead = () => {
+    if (!/^\/success\/?$/.test(location.pathname)) return;
+    const raw = get(sessionStorage, pendingKey);
+    if (!raw || !active) return;
+    remove(sessionStorage, pendingKey);
+    try {
+      const pending = JSON.parse(raw);
+      if (Date.now() - pending.at < 30 * 60 * 1000) track('generate_lead', { form_name: 'contact', lead_type: pending.type, language: pending.lang });
+    } catch {}
+  };
+  const enable = () => {
+    if (active) return;
+    active = true;
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function() { window.dataLayer.push(arguments); };
+    window.gtag('consent', 'default', { analytics_storage:'granted', ad_storage:'denied', ad_user_data:'denied', ad_personalization:'denied' });
+    window.gtag('js', new Date());
+    window.gtag('config', id, { send_page_view:false, allow_google_signals:false, allow_ad_personalization_signals:false, page_location:location.origin + location.pathname, page_referrer:document.referrer ? new URL(document.referrer).origin : '' });
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = 'https://www.googletagmanager.com/gtag/js?id=' + id;
+    document.head.appendChild(script);
+    track('page_view');
+    confirmLead();
+  };
+  document.getElementById('analytics-accept').addEventListener('click', () => { set(localStorage, consentKey, 'accepted'); banner.hidden = true; enable(); });
+  document.getElementById('analytics-decline').addEventListener('click', () => {
+    set(localStorage, consentKey, 'declined'); remove(sessionStorage, pendingKey);
+    if (active) window.gtag('consent', 'update', { analytics_storage:'denied' });
+    active = false; banner.hidden = true;
+  });
+  document.getElementById('analytics-preferences').addEventListener('click', () => { banner.hidden = false; });
+  document.querySelectorAll('a[href^="https://wa.me/"]').forEach(link => link.addEventListener('click', () => track('whatsapp_click', { contact_method:'whatsapp' })));
+  const form = document.querySelector('form[name="contact"]');
+  if (form) form.addEventListener('submit', () => {
+    if (!active || !form.checkValidity()) return;
+    const inputs = Array.from(form.querySelectorAll('input[name="need"]'));
+    const index = inputs.findIndex(input => input.checked);
+    set(sessionStorage, pendingKey, JSON.stringify({ at:Date.now(), type:['sample','blocks','slabs_tiles','funerary','custom'][index] || 'other', lang }));
+  });
+  const consent = get(localStorage, consentKey);
+  if (consent === 'accepted') enable();
+  else if (consent !== 'declined') banner.hidden = false;
+})();
+</script>
