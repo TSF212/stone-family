@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 310 96" role="img" aria-labelledby="logo-title">
+  <title id="logo-title">The Stone Family — Marbre noir uni</title>
+  <path fill="#0b0b09" d="M0 0h72v64L0 92Z"/>
+  <g fill="#0b0b09" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="400" letter-spacing="3.2">
+    <text x="94" y="26">THE STONE</text>
+    <text x="94" y="59">FAMILY</text>
+  </g>
+  <path stroke="#a48c60" stroke-width="1.5" d="M94 72h48"/>
+  <text x="94" y="91" fill="#66645e" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="400" letter-spacing="1.7">MARBRE NOIR UNI</text>
+</svg>
