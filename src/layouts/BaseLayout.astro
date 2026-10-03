@@ -1,5 +1,6 @@
 ---
 import Analytics from '../components/Analytics.astro';
+import Theme from '../components/Theme.astro';
 import { locales, defaultLocale, type Locale } from '../i18n/index';
 
 interface Props {
@@ -82,8 +83,8 @@ const isRtl = locale === 'ar';
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
-      background: #0B0B09;
-      color: #EDEBE4;
+      background: #F5F3ED;
+      color: #252824;
       font-family: 'Barlow', 'Noto Kufi Arabic', system-ui, sans-serif;
       font-weight: 300;
       -webkit-font-smoothing: antialiased;
@@ -95,16 +96,17 @@ const isRtl = locale === 'ar';
     /* Utilitaires globaux */
     .container { max-width: 1280px; margin: 0 auto; padding: 0 40px; }
     .mono { font-family: 'IBM Plex Mono', 'Noto Kufi Arabic', monospace; }
-    .accent { color: #C8A96A; }
+    .accent { color: #24483E; }
 
     /* Scrollbar discrète */
     ::-webkit-scrollbar { width: 4px; }
-    ::-webkit-scrollbar-track { background: #0B0B09; }
+    ::-webkit-scrollbar-track { background: #F5F3ED; }
     ::-webkit-scrollbar-thumb { background: #2a2a24; }
   </style>
 </head>
 <body>
   <slot />
+  <Theme />
   <Analytics locale={locale} />
 </body>
 </html>
