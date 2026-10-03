@@ -24,19 +24,19 @@ function switchUrl(loc: string) {
 <header id="site-header" style="position:sticky;top:0;z-index:50;background:#F2F0EC;border-bottom:1px solid rgba(0,0,0,0.08);">
 
   <!-- BARRE PRINCIPALE -->
-  <div style="display:flex;align-items:center;justify-content:space-between;padding:0 20px;height:72px;">
+  <div class="header-main">
 
     <!-- Logo -->
-    <a href={locale === defaultLocale ? '/' : `/${locale}/`} style="display:flex;align-items:center;flex:none;">
-      <img src="/images/logo.png" alt="The Stone Family" style="height:56px;width:auto;display:block;" />
+    <a href={locale === defaultLocale ? '/' : `/${locale}/`} class="brand">
+      <img src="/images/logo.png" alt="The Stone Family" width="250" height="80" />
     </a>
 
     <!-- Navigation desktop -->
     <nav id="nav-desktop" style="display:none;align-items:center;gap:16px;font-size:13px;letter-spacing:0.05em;text-transform:uppercase;">
-      <a href={supplyUrl(locale, 'blocks')} class="nav-link">{blocksLabel}</a>
-      <a href={supplyUrl(locale, 'slabs')} class="nav-link">{slabsLabel}</a>
       <a href="#pierre" class="nav-link">{t.nav.stone}</a>
       <a href="#carriere" class="nav-link">{t.nav.quarry}</a>
+      <a href={supplyUrl(locale, 'blocks')} class="nav-link">{blocksLabel}</a>
+      <a href={supplyUrl(locale, 'slabs')} class="nav-link">{slabsLabel}</a>
       <a href="#finitions" class="nav-link">{t.nav.finishes}</a>
       <a href="#export" class="nav-link">{t.nav.export}</a>
       <a href="#contact" class="nav-link">{t.nav.contact}</a>
@@ -80,10 +80,10 @@ function switchUrl(loc: string) {
 
     <!-- Liens nav -->
     <nav style="display:flex;flex-direction:column;gap:0;">
-      <a href={supplyUrl(locale, 'blocks')} class="mob-link">{blocksLabel}</a>
-      <a href={supplyUrl(locale, 'slabs')} class="mob-link">{slabsLabel}</a>
       <a href="#pierre" class="mob-link">{t.nav.stone}</a>
       <a href="#carriere" class="mob-link">{t.nav.quarry}</a>
+      <a href={supplyUrl(locale, 'blocks')} class="mob-link">{blocksLabel}</a>
+      <a href={supplyUrl(locale, 'slabs')} class="mob-link">{slabsLabel}</a>
       <a href="#finitions" class="mob-link">{t.nav.finishes}</a>
       <a href="#export" class="mob-link">{t.nav.export}</a>
       <a href="#contact" class="mob-link">{t.nav.contact}</a>
@@ -109,6 +109,20 @@ function switchUrl(loc: string) {
 </header>
 
 <style>
+  .header-main { display:flex;align-items:center;gap:28px;padding:0 28px;min-height:100px; }
+  .brand { display:flex;align-items:center;flex:none; }
+  .brand img { width:250px;height:80px;object-fit:cover;display:block; }
+  #nav-desktop { margin-inline-start:auto; }
+  #right-desktop { flex:none; }
+  #burger { margin-inline-start:auto; }
+  @media (max-width:1199px) {
+    .header-main { min-height:88px;padding:0 20px; }
+    .brand img { width:220px;height:72px; }
+  }
+  @media (max-width:480px) {
+    .header-main { min-height:80px; }
+    .brand img { width:190px;height:64px; }
+  }
   .supply-shortcuts { display:flex;gap:28px;padding:12px 20px;border-top:1px solid rgba(0,0,0,0.08);color:#1a1a1a;font-size:14px;letter-spacing:0.06em; }
   .supply-shortcuts a:hover { color:#755728; }
   .nav-link, .supply-shortcuts a { white-space:nowrap; }
