@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from './Header.astro';
+import { t as translate } from '../i18n/index';
 import { locales, localeLabels, localePath, type Locale } from '../i18n/index';
 import { supplyContent, supplyUrl, supplyAlternates, type SupplyKind } from '../i18n/supply';
 
@@ -13,14 +15,7 @@ const relatedKind = kind === 'blocks' ? 'slabs' : 'blocks';
 const alternates = supplyAlternates(kind);
 ---
 <BaseLayout title={`${product.title} | The Stone Family`} description={product.description} locale={locale} alternatePaths={alternates}>
-  <header class="supply-header">
-    <a href={home} aria-label={`The Stone Family — ${copy.home}`}><img src="/images/logo-header.svg" alt="The Stone Family" width="250" height="80" /></a>
-    <nav aria-label={copy.navigation}>
-      <a href={supplyUrl(locale, 'blocks')} aria-current={kind === 'blocks' ? 'page' : undefined}>{copy.blocks.label}</a>
-      <a href={supplyUrl(locale, 'slabs')} aria-current={kind === 'slabs' ? 'page' : undefined}>{copy.slabs.label}</a>
-      <a href={contact}>{copy.contact}</a>
-    </nav>
-  </header>
+  <Header t={translate(locale)} locale={locale} homePath={home} alternatePaths={alternates} />
   <main>
     <section class="intro wrap">
       <div class="page-tools">

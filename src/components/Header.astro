@@ -6,9 +6,11 @@ interface Props {
   t: any;
   locale: Locale;
   currentPath?: string;
+  homePath?: string;
+  alternatePaths?: Partial<Record<Locale, string>>;
 }
 
-const { t, locale, currentPath = '' } = Astro.props;
+const { t, locale, currentPath = '', homePath = '', alternatePaths } = Astro.props;
 const productLabels: Record<Locale, [string, string]> = {
   fr: ['Blocs', 'Tranches'], en: ['Blocks', 'Slabs'], it: ['Blocchi', 'Lastre'],
   es: ['Bloques', 'Tablas'], ar: ['الكتل', 'الألواح'],
@@ -16,6 +18,7 @@ const productLabels: Record<Locale, [string, string]> = {
 const [blocksLabel, slabsLabel] = productLabels[locale];
 
 function switchUrl(loc: string) {
+  if (alternatePaths?.[loc as Locale]) return alternatePaths[loc as Locale];
   if (loc === defaultLocale) return `/${currentPath}`;
   return `/${loc}/${currentPath}`;
 }
@@ -33,13 +36,13 @@ function switchUrl(loc: string) {
 
     <!-- Navigation desktop -->
     <nav id="nav-desktop" style="display:none;align-items:center;gap:16px;font-size:13px;letter-spacing:0.05em;text-transform:uppercase;">
-      <a href="#pierre" class="nav-link">{t.nav.stone}</a>
-      <a href="#carriere" class="nav-link">{t.nav.quarry}</a>
+      <a href={homePath + '#pierre'} class="nav-link">{t.nav.stone}</a>
+      <a href={homePath + '#carriere'} class="nav-link">{t.nav.quarry}</a>
       <a href={supplyUrl(locale, 'blocks')} class="nav-link">{blocksLabel}</a>
       <a href={supplyUrl(locale, 'slabs')} class="nav-link">{slabsLabel}</a>
-      <a href="#finitions" class="nav-link">{t.nav.finishes}</a>
-      <a href="#export" class="nav-link">{t.nav.export}</a>
-      <a href="#contact" class="nav-link">{t.nav.contact}</a>
+      <a href={homePath + '#finitions'} class="nav-link">{t.nav.finishes}</a>
+      <a href={homePath + '#export'} class="nav-link">{t.nav.export}</a>
+      <a href={homePath + '#contact'} class="nav-link">{t.nav.contact}</a>
     </nav>
 
     <!-- Droite desktop : langues + CTA + WhatsApp -->
@@ -54,7 +57,7 @@ function switchUrl(loc: string) {
           >{label}</a>
         ))}
       </div>
-      <a href="#contact"
+      <a href={homePath + '#contact'}
         style="padding:10px 20px;border:1px solid #24483E;color:#24483E;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;white-space:nowrap;transition:all 0.2s;text-decoration:none;"
         onmouseover="this.style.background='#24483E';this.style.color='#fff';"
         onmouseout="this.style.background='transparent';this.style.color='#24483E';"
@@ -80,13 +83,13 @@ function switchUrl(loc: string) {
 
     <!-- Liens nav -->
     <nav style="display:flex;flex-direction:column;gap:0;">
-      <a href="#pierre" class="mob-link">{t.nav.stone}</a>
-      <a href="#carriere" class="mob-link">{t.nav.quarry}</a>
+      <a href={homePath + '#pierre'} class="mob-link">{t.nav.stone}</a>
+      <a href={homePath + '#carriere'} class="mob-link">{t.nav.quarry}</a>
       <a href={supplyUrl(locale, 'blocks')} class="mob-link">{blocksLabel}</a>
       <a href={supplyUrl(locale, 'slabs')} class="mob-link">{slabsLabel}</a>
-      <a href="#finitions" class="mob-link">{t.nav.finishes}</a>
-      <a href="#export" class="mob-link">{t.nav.export}</a>
-      <a href="#contact" class="mob-link">{t.nav.contact}</a>
+      <a href={homePath + '#finitions'} class="mob-link">{t.nav.finishes}</a>
+      <a href={homePath + '#export'} class="mob-link">{t.nav.export}</a>
+      <a href={homePath + '#contact'} class="mob-link">{t.nav.contact}</a>
     </nav>
 
     <!-- Langues -->
@@ -100,7 +103,7 @@ function switchUrl(loc: string) {
     </div>
 
     <!-- CTA mobile -->
-    <a href="#contact"
+    <a href={homePath + '#contact'}
       style="margin-top:20px;padding:14px 20px;background:#24483E;color:#F5F3ED;font-size:13px;letter-spacing:0.12em;text-transform:uppercase;text-align:center;text-decoration:none;display:block;"
     >{t.cta_sample}</a>
 
