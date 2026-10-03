@@ -1,4 +1,5 @@
 ---
+import Analytics from '../components/Analytics.astro';
 import { locales, defaultLocale, type Locale } from '../i18n/index';
 
 interface Props {
@@ -101,5 +102,6 @@ const isRtl = locale === 'ar';
 </head>
 <body>
   <slot />
+  <Analytics locale={locale} />
 </body>
 </html>
