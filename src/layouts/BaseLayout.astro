@@ -8,13 +8,15 @@ interface Props {
   locale: Locale;
   canonicalPath?: string;
   availableLocales?: Locale[];
+  alternatePaths?: Partial<Record<Locale, string>>;
 }
 
-const { title, description, locale, canonicalPath = '', availableLocales = locales } = Astro.props;
+const { title, description, locale, canonicalPath = '', availableLocales = locales, alternatePaths } = Astro.props;
 const site = Astro.site!.origin;
 
 // Génère les URLs hreflang pour toutes les locales
 function hrefForLocale(loc: string) {
+  if (alternatePaths?.[loc as Locale]) return `${site}${alternatePaths[loc as Locale]}`;
   if (loc === defaultLocale) return `${site}/${canonicalPath}`;
   return `${site}/${loc}/${canonicalPath}`;
 }
@@ -76,7 +78,7 @@ const isRtl = locale === 'ar';
     },
   })} />
 
-  <style>
+  <style is:global>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
