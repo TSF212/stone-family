@@ -21,7 +21,7 @@ function switchUrl(loc: string) {
 }
 ---
 
-<header id="site-header" style="position:sticky;top:0;z-index:50;background:#F2F0EC;border-bottom:1px solid rgba(0,0,0,0.08);">
+<header id="site-header" style="position:sticky;top:0;z-index:50;background:#E8E3D9;border-bottom:1px solid rgba(0,0,0,0.08);">
 
   <!-- BARRE PRINCIPALE -->
   <div class="header-main">
@@ -48,16 +48,16 @@ function switchUrl(loc: string) {
         {Object.entries(localeLabels).map(([loc, label]) => (
           <a
             href={switchUrl(loc)}
-            style={`padding:5px 7px;color:${loc === locale ? '#C8A96A' : 'rgba(0,0,0,0.35)'};transition:color 0.2s;text-decoration:none;`}
+            style={`padding:5px 7px;color:${loc === locale ? '#24483E' : 'rgba(0,0,0,0.35)'};transition:color 0.2s;text-decoration:none;`}
             onmouseover="this.style.color='#1a1a1a'"
-            onmouseout={`this.style.color='${loc === locale ? '#C8A96A' : 'rgba(0,0,0,0.35)'}'`}
+            onmouseout={`this.style.color='${loc === locale ? '#24483E' : 'rgba(0,0,0,0.35)'}'`}
           >{label}</a>
         ))}
       </div>
       <a href="#contact"
-        style="padding:10px 20px;border:1px solid #C8A96A;color:#C8A96A;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;white-space:nowrap;transition:all 0.2s;text-decoration:none;"
-        onmouseover="this.style.background='#C8A96A';this.style.color='#fff';"
-        onmouseout="this.style.background='transparent';this.style.color='#C8A96A';"
+        style="padding:10px 20px;border:1px solid #24483E;color:#24483E;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;white-space:nowrap;transition:all 0.2s;text-decoration:none;"
+        onmouseover="this.style.background='#24483E';this.style.color='#fff';"
+        onmouseout="this.style.background='transparent';this.style.color='#24483E';"
       >{t.cta_sample}</a>
     </div>
 
@@ -76,7 +76,7 @@ function switchUrl(loc: string) {
   </nav>
 
   <!-- MENU MOBILE (panneau) -->
-  <div id="mobile-menu" style="display:none;flex-direction:column;background:#F2F0EC;border-top:1px solid rgba(0,0,0,0.08);padding:24px 20px 32px;">
+  <div id="mobile-menu" style="display:none;flex-direction:column;background:#E8E3D9;border-top:1px solid rgba(0,0,0,0.08);padding:24px 20px 32px;">
 
     <!-- Liens nav -->
     <nav style="display:flex;flex-direction:column;gap:0;">
@@ -94,14 +94,14 @@ function switchUrl(loc: string) {
       {Object.entries(localeLabels).map(([loc, label]) => (
         <a
           href={switchUrl(loc)}
-          style={`padding:8px 12px;color:${loc === locale ? '#C8A96A' : 'rgba(0,0,0,0.4)'};text-decoration:none;border:1px solid ${loc === locale ? '#C8A96A' : 'rgba(0,0,0,0.12)'};`}
+          style={`padding:8px 12px;color:${loc === locale ? '#24483E' : 'rgba(0,0,0,0.4)'};text-decoration:none;border:1px solid ${loc === locale ? '#24483E' : 'rgba(0,0,0,0.12)'};`}
         >{label}</a>
       ))}
     </div>
 
     <!-- CTA mobile -->
     <a href="#contact"
-      style="margin-top:20px;padding:14px 20px;background:#C8A96A;color:#0B0B09;font-size:13px;letter-spacing:0.12em;text-transform:uppercase;text-align:center;text-decoration:none;display:block;"
+      style="margin-top:20px;padding:14px 20px;background:#24483E;color:#F5F3ED;font-size:13px;letter-spacing:0.12em;text-transform:uppercase;text-align:center;text-decoration:none;display:block;"
     >{t.cta_sample}</a>
 
   </div>
@@ -131,7 +131,7 @@ function switchUrl(loc: string) {
     text-decoration: none;
     transition: color 0.2s;
   }
-  .nav-link:hover { color: #C8A96A; }
+  .nav-link:hover { color: #24483E; }
 
   .mob-link {
     display: block;
@@ -145,7 +145,7 @@ function switchUrl(loc: string) {
     border-bottom: 1px solid rgba(0,0,0,0.08);
     transition: color 0.2s;
   }
-  .mob-link:hover { color: #C8A96A; }
+  .mob-link:hover { color: #24483E; }
 
   /* Desktop : afficher nav + right, cacher burger */
   @media (min-width: 1200px) {
