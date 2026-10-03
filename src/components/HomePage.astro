@@ -51,6 +51,10 @@ const ph = (label: string) => `
   }
   .img-ph-light span { color: rgba(37,40,36,0.3); }
 
+  .stone-swatches { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 8px; }
+  .stone-swatch { margin: 0; min-width: 0; }
+  .stone-swatch img { display: block; width: 100%; aspect-ratio: 3 / 4; height: auto; object-fit: cover; border: 1px solid rgba(37,40,36,0.12); }
+  .stone-swatch figcaption { margin-top: 10px; font-size: 12px; line-height: 1.4; color: #252824; }
   /* ── LABEL ────────────────────────────────── */
   .section-label {
     font-family: 'IBM Plex Mono', 'Noto Kufi Arabic', monospace;
@@ -348,13 +352,14 @@ const ph = (label: string) => `
         ))}
       </div>
     </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:8px;">
-      {['macro_polished.jpg', 'macro_honed.jpg', 'edge_detail.jpg'].map((img) => (
-        <div class="img-ph img-ph-light" style="aspect-ratio:3/4;">
-          <span>{img}</span>
-        </div>
-      ))}
-    </div>
+    <div class="stone-swatches">
+  {['poli-miroir', 'boucharde', 'brut-sciage'].map((finish, index) => (
+    <figure class="stone-swatch">
+      <img src={`/images/atlas-noir-${finish}.webp`} alt={t.finishItems[[0, 3, 4][index]].n} width="600" height="800" loading="lazy" decoding="async" />
+      <figcaption>{t.finishItems[[0, 3, 4][index]].n}</figcaption>
+    </figure>
+  ))}
+</div>
   </div>
 </section>
 
