@@ -1,59 +1,11 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import SupplyPage from '../components/SupplyPage.astro';
+import { supplyContent, type SupplyKind } from '../i18n/supply';
 
 export function getStaticPaths() {
-  return [
-    { params: { supply: 'blocs-marbre-noir' }, props: { kind: 'blocks' } },
-    { params: { supply: 'tranches-marbre-noir' }, props: { kind: 'slabs' } },
-  ];
+  return (['blocks', 'slabs'] as SupplyKind[]).map(kind => ({
+    params: { supply: supplyContent.fr[kind].slug }, props: { kind },
+  }));
 }
-const blocks = Astro.props.kind === 'blocks';
-const path = `${Astro.params.supply}/`;
-const title = blocks ? 'Blocs de marbre noir pour professionnels | The Stone Family' : 'Tranches de marbre noir pour professionnels | The Stone Family';
-const description = blocks ? 'Préparez votre approvisionnement en blocs de marbre noir du Maroc : gabarits, besoins de sciage, quantité et destination. Contactez The Stone Family.' : 'Préparez votre commande de tranches de marbre noir du Maroc : dimensions utiles, épaisseur, finition et surface. Contactez The Stone Family.';
-const heading = blocks ? 'Choisir ses blocs de marbre noir pour le sciage' : 'Préparer une commande de tranches de marbre noir';
-const steps = blocks ? [
-  ['Définir le gabarit utile', 'Indiquez les dimensions que votre installation peut recevoir et les formats que vous souhaitez obtenir après sciage. Le choix du bloc doit tenir compte de votre équipement, de la manutention et de votre plan de production.'],
-  ['Préciser la quantité', 'Exprimez votre besoin en nombre de blocs, en volume ou en tonnage estimé. Distinguez une première commande d’un besoin récurrent et précisez la période de réception souhaitée.'],
-  ['Examiner le lot proposé', 'Avant de vous engager, demandez les dimensions relevées, les vues des différentes faces et les informations disponibles sur chaque bloc. Discutez des critères d’acceptation adaptés à votre transformation.'],
-] : [
-  ['Partir du plan de débit', 'La surface totale ne suffit pas à définir une commande. Précisez les dimensions des pièces à fabriquer, les longueurs minimales utiles et les marges nécessaires à la découpe. Vous pourrez ainsi évaluer le lot au regard de votre projet.'],
-  ['Définir l’état de surface', 'Indiquez l’épaisseur recherchée et si les tranches doivent être reprises dans votre atelier ou livrées avec une finition déterminée. Faites confirmer les finitions et les tolérances proposées pour votre commande.'],
-  ['Valider l’aspect du lot', 'Pour un ensemble de pièces, examinez les tranches dans des conditions de lumière comparables. Un échantillon aide à apprécier la matière et la finition ; demandez également les informations relatives au lot envisagé.'],
-];
-const checklist = blocks ? ['Activité et équipement de sciage', 'Gabarits minimum et maximum acceptés', 'Nombre de blocs, volume ou tonnage estimé', 'Destination et moyens de déchargement', 'Date souhaitée et fréquence des commandes'] : ['Surface estimée et dimensions des pièces finales', 'Épaisseur et finition recherchées', 'Dimensions minimales utiles des tranches', 'Besoin d’échantillon et critères visuels', 'Destination et période de réception souhaitée'];
-const faqs = blocks ? [
-  ['Peut-on choisir un bloc uniquement sur son poids ?', 'Le poids donne une indication de quantité, mais les dimensions utiles et l’état du bloc comptent pour votre plan de sciage. Communiquez vos contraintes d’atelier pour préparer une demande exploitable.'],
-  ['Quelles dimensions sont disponibles ?', 'Les blocs sont des unités de pierre naturelle : leurs gabarits varient. Les dimensions, quantités et disponibilités doivent être confirmées pour le lot proposé.'],
-  ['Comment préparer une demande de prix ?', 'Réunissez vos gabarits, votre quantité estimée, votre destination et votre calendrier. Précisez aussi les opérations de transformation prévues afin de contextualiser votre besoin.'],
-] : [
-  ['Faut-il commander uniquement au mètre carré ?', 'Ajoutez les dimensions des pièces à produire et les contraintes de découpe. Deux lots de même surface peuvent offrir des possibilités de débit différentes.'],
-  ['Un échantillon représente-t-il toute la commande ?', 'Il permet d’examiner une matière et une finition, mais ne remplace pas la validation du lot. La pierre naturelle présente des variations qu’il faut prendre en compte dans votre sélection.'],
-  ['Quels formats et finitions peut-on commander ?', 'Présentez les caractéristiques recherchées à The Stone Family. Les formats, épaisseurs, finitions, quantités et délais seront à confirmer dans la proposition commerciale.'],
-];
 ---
-<BaseLayout title={title} description={description} locale="fr" canonicalPath={path} availableLocales={['fr']}>
-  <header class="supply-header">
-    <a href="/" aria-label="The Stone Family — Accueil"><img src="/images/logo.png" alt="The Stone Family" width="150" /></a>
-    <nav aria-label="Navigation approvisionnement"><a href="/blocs-marbre-noir/" aria-current={blocks ? 'page' : undefined}>Blocs</a><a href="/tranches-marbre-noir/" aria-current={!blocks ? 'page' : undefined}>Tranches</a><a href="/#contact">Contact</a></nav>
-  </header>
-  <main>
-    <section class="intro wrap">
-      <nav class="breadcrumb" aria-label="Fil d’Ariane"><a href="/">Accueil</a><span aria-hidden="true"> / </span><span>{blocks ? 'Blocs de marbre noir' : 'Tranches de marbre noir'}</span></nav>
-      <p class="eyebrow">The Stone Family · Approvisionnement professionnel</p>
-      <h1>{heading}</h1>
-      <p class="lead">{blocks ? 'Vous achetez de la matière pour la transformer dans votre atelier ? Préparez votre approvisionnement en blocs de marbre noir du Maroc à partir de vos contraintes de sciage, de vos volumes et de votre destination.' : 'Pour un atelier de marbrerie ou une activité de distribution, une commande de tranches de marbre noir du Maroc se prépare à partir des dimensions utiles, de la finition attendue et des pièces à réaliser.'}</p>
-      <a class="cta" href="/#contact">{blocks ? 'Demander une proposition pour des blocs' : 'Demander une proposition pour des tranches'} →</a>
-    </section>
-    <section class="light"><div class="wrap"><p class="eyebrow">Préparer votre sélection</p><h2>{blocks ? 'Un achat adapté à votre outil de production' : 'Une sélection adaptée à votre fabrication'}</h2><div class="cards">{steps.map(([name, text], i) => <article><span class="number">0{i + 1}</span><h3>{name}</h3><p>{text}</p></article>)}</div></div></section>
-    <section class="wrap split"><div><p class="eyebrow">Votre demande</p><h2>Les informations à réunir pour un devis</h2><p>Une demande précise facilite la comparaison des propositions et la préparation de votre commande. Si certains points restent ouverts, indiquez-les dès le premier échange.</p></div><ul>{checklist.map(item => <li>{item}</li>)}</ul></section>
-    <section class="light"><div class="wrap"><h2>Anticiper la réception de la pierre</h2><p>Indiquez l’adresse de destination, les conditions d’accès et les moyens de manutention disponibles. Faites préciser le conditionnement, les responsabilités de transport et les modalités de déchargement dans la proposition commerciale.</p><p>Les quantités disponibles, les caractéristiques du lot et le calendrier doivent être confirmés avant la commande. Ces éléments permettent de rapprocher l’approvisionnement de votre planning de fabrication.</p></div></section>
-    <section class="wrap"><p class="eyebrow">Questions d’achat</p><h2>{blocks ? 'Acheter des blocs : les points à clarifier' : 'Acheter des tranches : les points à clarifier'}</h2>{faqs.map(([q, a]) => <details><summary>{q}</summary><p>{a}</p></details>)}</section>
-    <section class="wrap closing"><h2>Présentez-nous votre besoin d’approvisionnement</h2><p>Transmettez vos dimensions recherchées, votre quantité et votre destination via le formulaire de contact. Mentionnez les contraintes de votre atelier et les points à confirmer.</p><a class="cta" href="/#contact">Contacter The Stone Family →</a><a class="related" href={blocks ? '/tranches-marbre-noir/' : '/blocs-marbre-noir/'}>{blocks ? 'Vous recherchez des tranches déjà sciées ?' : 'Vous souhaitez scier vous-même des blocs ?'} →</a></section>
-  </main>
-  <footer class="wrap">The Stone Family · <a href="/">Accueil</a> · <a href="/#contact">Contact</a></footer>
-  <script type="application/ld+json" set:html={JSON.stringify({'@context':'https://schema.org','@type':'BreadcrumbList',itemListElement:[{'@type':'ListItem',position:1,name:'Accueil',item:'https://thestonefamily.ma/'},{'@type':'ListItem',position:2,name:blocks ? 'Blocs de marbre noir' : 'Tranches de marbre noir',item:`https://thestonefamily.ma/${path}`}]})} />
-</BaseLayout>
-<style>
-  .wrap{max-width:1160px;margin:auto;padding:72px 28px}.supply-header{background:#F2F0EC;color:#16150F;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:16px 28px}.supply-header img{max-height:56px;width:auto}.supply-header nav{display:flex;gap:22px;flex-wrap:wrap}.supply-header a[aria-current]{color:#755728}.breadcrumb{font-size:14px;margin-bottom:38px;color:#bbb8ad}.eyebrow{color:#C8A96A;text-transform:uppercase;letter-spacing:.13em;font-size:12px;margin-bottom:22px}h1,h2,h3{font-family:Archivo,system-ui,sans-serif;font-weight:500}h1{font-size:clamp(34px,6vw,64px);line-height:1.1;max-width:20ch;margin-bottom:28px}h2{font-size:clamp(27px,4vw,40px);line-height:1.2;margin-bottom:26px}h3{font-size:22px;line-height:1.3;margin:18px 0}p{font-size:18px;line-height:1.75;margin-bottom:20px}.lead{max-width:66ch;color:#bbb8ad}.cta{display:inline-block;background:#C8A96A;color:#0B0B09;padding:16px 22px;font-weight:500;line-height:1.5;margin-top:12px}.light{background:#F2F0EC;color:#16150F}.light .eyebrow{color:#755728}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}.cards p{font-size:17px}.number{font-family:monospace;color:#755728}.split{display:grid;grid-template-columns:1fr 1fr;gap:48px}ul{padding-left:24px}li{font-size:18px;line-height:1.7;margin-bottom:16px}details{border-bottom:1px solid #444238;padding:22px 0}summary{font-size:20px;cursor:pointer;line-height:1.5}details p{margin:18px 0 0;color:#bbb8ad}.closing{border-top:1px solid #444238}.related{display:block;color:#C8A96A;margin-top:28px;line-height:1.5}footer.wrap{padding-top:30px;padding-bottom:30px;font-size:14px;border-top:1px solid #444238}a:focus-visible,summary:focus-visible{outline:2px solid #C8A96A;outline-offset:5px}@media(max-width:760px){.cards,.split{grid-template-columns:1fr}.wrap{padding:48px 20px}.supply-header{padding:14px 20px;flex-wrap:wrap}.supply-header nav{gap:18px;font-size:15px}}
-</style>
+<SupplyPage locale="fr" kind={Astro.props.kind} />
