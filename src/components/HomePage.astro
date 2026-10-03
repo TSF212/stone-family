@@ -51,6 +51,7 @@ const ph = (label: string) => `
   }
   .img-ph-light span { color: rgba(37,40,36,0.3); }
 
+  .quarry-photo { display: block; width: 100%; aspect-ratio: 3 / 4; height: auto; object-fit: cover; order: 2; }
   .stone-swatches { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 8px; }
   .stone-swatch { margin: 0; min-width: 0; }
   .stone-swatch img { display: block; width: 100%; aspect-ratio: 3 / 4; height: auto; object-fit: cover; border: 1px solid rgba(37,40,36,0.12); }
@@ -367,9 +368,7 @@ const ph = (label: string) => `
 <section class="section-dark" id="carriere">
   <div class="section-label on-dark">{t.quarry.label}</div>
   <div class="grid-2" style="align-items:center;">
-    <div class="img-ph" style="aspect-ratio:3/4;order:2;">
-      <span>quarry_face_wide.jpg — 800 × 1060 px</span>
-    </div>
+    <img class="quarry-photo" src="/images/carriere-atlas.webp" alt={t.nav.quarry} width="1080" height="1440" loading="lazy" decoding="async" />
     <div style="order:1;">
       <h2 class="h2-dark">{t.quarry.title}</h2>
       <p class="lead-dark">{t.quarry.p1}</p>
