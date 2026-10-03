@@ -9,6 +9,7 @@ const { t } = Astro.props;
 const pathLocale = Astro.url.pathname.split('/')[1];
 const supplyLocale: Locale = locales.includes(pathLocale as Locale) ? pathLocale as Locale : 'fr';
 const supplyCopy = supplyContent[supplyLocale];
+const heroImageAlt: Record<Locale, string> = { fr: 'Illustration de marbre noir uni sans veines, finition polie miroir', en: 'Illustration of veinless black marble with a mirror-polished finish', it: 'Illustrazione di marmo nero senza venature con finitura lucidata a specchio', es: 'Ilustración de mármol negro sin vetas con acabado pulido espejo', ar: 'صورة توضيحية لرخام أسود خالٍ من العروق بلمسة مصقولة كالمرآة' };
 const accent = '#24483E';
 const dark = '#F5F3ED';
 const light = '#252824';
@@ -107,6 +108,9 @@ const ph = (label: string) => `
     align-items: flex-end;
     padding: 20px;
   }
+  .hero-img { position: relative; overflow: hidden; padding: 0; min-width: 0; aspect-ratio: 4 / 3; }
+  .hero-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 57% center; display: block; }
+  @media (min-width: 900px) { .hero-img { aspect-ratio: auto; } }
   .hero-img span {
     font-family: 'IBM Plex Mono', monospace;
     font-size: 10px;
@@ -175,6 +179,7 @@ const ph = (label: string) => `
   .section-mid { background: #F5F3ED; padding: 64px 20px; border-top: 1px solid rgba(37,40,36,0.09); }
 
   /* ── GRILLES RESPONSIVE ───────────────────── */
+  .grid-2 > * { min-width: 0; }
   .grid-2 { display: grid; grid-template-columns: 1fr; gap: 40px; }
   .grid-3 { display: grid; grid-template-columns: 1fr; gap: 1px; background: rgba(37,40,36,0.09); border: 1px solid rgba(37,40,36,0.09); }
   .grid-3-light { display: grid; grid-template-columns: 1fr; gap: 1px; background: rgba(37,40,36,0.12); border: 1px solid rgba(37,40,36,0.12); }
@@ -304,9 +309,7 @@ const ph = (label: string) => `
       <a href="#contact" class="btn-secondary">{t.hero.cta_secondary}</a>
     </div>
   </div>
-  <div class="hero-img">
-    <span>Marbre noir</span>
-  </div>
+  <div class="hero-img"><img class="hero-photo" src="/images/marbre-noir-poli-1280.webp" srcset="/images/marbre-noir-poli-640.webp 640w, /images/marbre-noir-poli-1280.webp 1280w, /images/marbre-noir-poli-1920.webp 1920w" sizes="(min-width: 900px) 48vw, 100vw" width="1942" height="809" alt={heroImageAlt[supplyLocale]} loading="eager" fetchpriority="high" decoding="async" /></div>
 </section>
 
 <!-- ══ STATS ═════════════════════════════════ -->
