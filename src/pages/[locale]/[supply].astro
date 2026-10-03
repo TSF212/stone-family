@@ -1,0 +1,15 @@
+---
+import SupplyPage from '../../components/SupplyPage.astro';
+import { locales } from '../../i18n/index';
+import { supplyContent, type SupplyKind } from '../../i18n/supply';
+
+export function getStaticPaths() {
+  return locales.filter(locale => locale !== 'fr').flatMap(locale =>
+    (['blocks', 'slabs'] as SupplyKind[]).map(kind => ({
+      params: { locale, supply: supplyContent[locale][kind].slug },
+      props: { locale, kind },
+    }))
+  );
+}
+---
+<SupplyPage locale={Astro.props.locale} kind={Astro.props.kind} />
