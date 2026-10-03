@@ -429,7 +429,7 @@ const ph = (label: string) => `
         {w.img === 'ref_hotel.jpg' ? <img class="ref-photo" src="/images/hall-hotel-marbre-noir-1120.webp" alt={`${w.n} — ${illustrationLabels[supplyLocale]}`} width="1120" height="1400" loading="lazy" decoding="async" /> : <div class="img-ph"><span>{w.img} — {w.n}</span></div>}
         <div class="ref-info">
           <span class="ref-name">{w.n}</span>
-          <span class="ref-loc">{w.img === 'ref_hotel.jpg' ? illustrationLabels[supplyLocale] : w.loc}</span>
+          {w.img !== 'ref_hotel.jpg' && <span class="ref-loc">{w.loc}</span>}
         </div>
       </div>
     ))}
